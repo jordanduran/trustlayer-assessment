@@ -1,14 +1,19 @@
-const initState = {
-  questionsData: [],
-  score: 0,
-};
-
-export const quizReducer = (state = initState, action) => {
+export const quizReducer = (state, action) => {
   switch (action.type) {
     case 'LOAD_QUESTIONS':
       return {
         ...state,
         questionsData: action.payload,
+      };
+    case 'NEXT_QUESTION':
+      return {
+        ...state,
+        currentQuestionIndex: state.currentQuestionIndex + 1,
+      };
+    case 'PREV_QUESTION':
+      return {
+        ...state,
+        currentQuestionIndex: state.currentQuestionIndex - 1,
       };
     default:
       return state;
