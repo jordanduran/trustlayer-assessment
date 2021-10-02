@@ -6,6 +6,7 @@ export const QuizContext = createContext();
 const QuizContextProvider = (props) => {
   const [state, dispatch] = useReducer(quizReducer, {
     questionsData: [],
+    currentQuestionIndex: 0,
     score: 0,
   });
 
