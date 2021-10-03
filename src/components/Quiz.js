@@ -45,6 +45,8 @@ const Quiz = () => {
     setOptions(listOfAnswers);
   }, [questionsData, currentQuestionIndex]);
 
+  // On last question, once answer is checked the game is over after 3 seconds
+
   useEffect(() => {
     if (currentQuestionIndex === 9 && checkAnswerBtnClicked) {
       const timer = setTimeout(() => {
@@ -56,6 +58,8 @@ const Quiz = () => {
     }
   }, [currentQuestionIndex, checkAnswerBtnClicked, gameOver]);
 
+  // Storing user data in localStorage
+
   useEffect(() => {
     const data = userData && userData;
     window.localStorage.setItem('users', JSON.stringify(data));
@@ -66,6 +70,8 @@ const Quiz = () => {
   const handleSelectOption = (userSelectedOption) => {
     setSelectedOption(userSelectedOption);
   };
+
+  // Adds points according to difficulty of question
 
   const handleCheckAnswer = () => {
     setCheckAnswerBtnClicked(true);
