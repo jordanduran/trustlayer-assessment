@@ -4,7 +4,7 @@ import Leaderboard from './Leaderboard';
 
 const Quiz = () => {
   const [questionsData, setQuestionsData] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(9);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [userIsCorrect, setUserIsCorrect] = useState(false);
@@ -129,7 +129,6 @@ const Quiz = () => {
   };
 
   const handleRestart = () => {
-    setCurrentQuestionIndex(0);
     window.location.reload();
   };
 
