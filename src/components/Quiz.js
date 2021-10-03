@@ -5,6 +5,8 @@ import Leaderboard from './Leaderboard';
 const Quiz = () => {
   const [questionsData, setQuestionsData] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [previousQuestionIndex, setPreviousQuestionIndex] = useState(0);
+  const [firstQuestionAnswered, setFirstQuestionAnswered] = useState(false);
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [userIsCorrect, setUserIsCorrect] = useState(false);
@@ -74,6 +76,7 @@ const Quiz = () => {
   // Adds points according to difficulty of question
 
   const handleCheckAnswer = () => {
+    setFirstQuestionAnswered(true);
     setCheckAnswerBtnClicked(true);
     if (selectedOption === questionsData[currentQuestionIndex].correct_answer) {
       setUserIsCorrect(true);
@@ -89,10 +92,12 @@ const Quiz = () => {
 
   const handlePrevBtnClick = () => {
     setCurrentQuestionIndex(currentQuestionIndex - 1);
+    setCheckAnswerBtnClicked(true);
   };
 
   const handleNextBtnClick = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
+    setPreviousQuestionIndex(currentQuestionIndex);
     setSelectedOption('');
     setCheckAnswerBtnClicked(false);
     setUserIsCorrect(false);
@@ -138,6 +143,9 @@ const Quiz = () => {
     window.location.reload();
   };
 
+  console.log('CURR', currentQuestionIndex);
+  console.log('PREV', previousQuestionIndex);
+
   if (!gameOver) {
     return (
       <div className='quiz-container'>
@@ -163,7 +171,12 @@ const Quiz = () => {
                       : 'answer-option'
                   }
                   onClick={() => handleSelectOption(option)}
-                  disabled={checkAnswerBtnClicked}
+                  disabled={
+                    checkAnswerBtnClicked ||
+                    (previousQuestionIndex === currentQuestionIndex &&
+                      currentQuestionIndex !== 0) ||
+                    (firstQuestionAnswered && currentQuestionIndex === 0)
+                  }
                 >
                   {option.replace(/(&quot;)/g, '"')}
                 </button>
