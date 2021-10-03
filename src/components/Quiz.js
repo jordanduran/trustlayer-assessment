@@ -1,15 +1,26 @@
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Leaderboard from './Leaderboard';
 
 const Quiz = () => {
   const [questionsData, setQuestionsData] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(9);
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [userIsCorrect, setUserIsCorrect] = useState(false);
   const [checkAnswerBtnClicked, setCheckAnswerBtnClicked] = useState(false);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [userSave, setUserSave] = useState(false);
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState(() => {
+    const users = localStorage.getItem('users');
+    return users !== null ? JSON.parse(users) : [];
+  });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [leaderboardUsers, setLeaderboardUsers] = useState([]);
+  const [noBtnClicked, setNoBtnClicked] = useState(false);
 
   // Fetch data from API on component mount
 
@@ -45,6 +56,11 @@ const Quiz = () => {
     }
   }, [currentQuestionIndex, checkAnswerBtnClicked, gameOver]);
 
+  useEffect(() => {
+    const data = userData && userData;
+    window.localStorage.setItem('users', JSON.stringify(data));
+  }, [userData]);
+
   // Creating an array combining correct answer and incorrect answers then randomly sorting it
 
   const handleSelectOption = (userSelectedOption) => {
@@ -76,7 +92,46 @@ const Quiz = () => {
     setUserIsCorrect(false);
   };
 
-  console.log(questionsData[currentQuestionIndex]);
+  const handleSaveScore = () => {
+    setUserSave(true);
+  };
+
+  const handleUserInputChange = (e) => {
+    setUser(e.target.value);
+  };
+
+  const handlePasswordInputChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setUserData([
+      ...userData,
+      {
+        user,
+        password,
+        score,
+        date: new Date().toLocaleString().split(',')[0],
+      },
+    ]);
+    const updatedLeaderboard = [
+      ...leaderboardUsers,
+      {
+        user,
+        password,
+      },
+    ].slice(0, 9);
+    setLeaderboardUsers(updatedLeaderboard);
+    setUser('');
+    setPassword('');
+  };
+
+  const handleRestart = () => {
+    setCurrentQuestionIndex(0);
+    window.location.reload();
+  };
 
   if (!gameOver) {
     return (
@@ -163,6 +218,62 @@ const Quiz = () => {
       <div className='game-over-container'>
         <h1 className='game-over-header'>Game Over</h1>
         <p className='final-score'>Your final score is {score}</p>
+        {!userSave && !noBtnClicked && (
+          <div className='game-over-form-container'>
+            <p className='save-score-header'>
+              Would you like to save your score?
+            </p>
+            <div className='save-controls'>
+              <button
+                className='save-btn no'
+                onClick={() => setNoBtnClicked(true)}
+              >
+                No
+              </button>
+              <button className='save-btn yes' onClick={handleSaveScore}>
+                Yes
+              </button>
+            </div>
+          </div>
+        )}
+        {userSave && !formSubmitted && (
+          <div className='save-form-container'>
+            <form className='save-form' onSubmit={handleSubmit}>
+              <label>Username:</label>
+              <input
+                type='text'
+                name='user'
+                className='user-input'
+                required
+                value={user}
+                onChange={handleUserInputChange}
+              />
+              <label>Password:</label>
+              <input
+                type='password'
+                name='password'
+                className='password-input'
+                required
+                value={password}
+                onChange={handlePasswordInputChange}
+              />
+              <button className='submit-btn' type='submit'>
+                Submit
+              </button>
+            </form>
+          </div>
+        )}
+        {noBtnClicked || formSubmitted ? (
+          <div className='play-again-container'>
+            <p className='thanks-text'>Thank you for playing!</p>
+            <button className='restart-btn' onClick={handleRestart}>
+              Start a new Quiz
+            </button>
+          </div>
+        ) : null}
+        <h1 className='highscore-header'>LEADERBOARD</h1>
+
+        <Leaderboard users={leaderboardUsers} />
       </div>
     );
   }

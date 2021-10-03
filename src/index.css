@@ -155,3 +155,88 @@ body {
   font-size: 25px;
   margin: 0;
 }
+
+.save-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.save-btn {
+  background-color: deepskyblue;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 2px;
+  font-weight: bold;
+  cursor: pointer;
+  color: floralwhite;
+  margin: 0.5em;
+}
+
+.save-btn:hover {
+  background-color: rgb(0, 150, 199);
+}
+
+.save-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-input {
+  margin: 0.5em 0;
+}
+
+.submit-btn {
+  cursor: pointer;
+  margin: 1em 0;
+}
+
+.high-score-header {
+  text-align: center;
+  margin: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #131313;
+  padding: 8px;
+}
+
+th,
+td {
+  text-align: center;
+}
+
+td {
+  text-transform: uppercase;
+}
+
+/* tr:nth-child(even) {
+  background-color: #dddddd;
+} */
+
+.play-again-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.restart-btn {
+  background-color: deepskyblue;
+  padding: 10px 15px;
+  border-style: none;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  color: floralwhite;
+}
+
+.restart-btn:hover {
+  background-color: rgb(0, 150, 199);
+}
