@@ -210,7 +210,10 @@ const Quiz = () => {
             <p className='incorrect-answer'>
               Sorry, the correct answer is{' '}
               {questionsData.length &&
-                questionsData[currentQuestionIndex].correct_answer}{' '}
+                questionsData[currentQuestionIndex].correct_answer.replace(
+                  /(&quot;)/g,
+                  '"'
+                )}{' '}
             </p>
           )}
         </div>
