@@ -109,18 +109,6 @@ const Quiz = () => {
     setUserIsCorrect(false);
   };
 
-  const handleSaveScore = () => {
-    setUserSave(true);
-  };
-
-  const handleUserInputChange = (e) => {
-    setUser(e.target.value);
-  };
-
-  const handlePasswordInputChange = (e) => {
-    setPassword(e.target.value);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormSubmitted(true);
@@ -143,10 +131,6 @@ const Quiz = () => {
     setLeaderboardUsers(updatedLeaderboard);
     setUser('');
     setPassword('');
-  };
-
-  const handleRestart = () => {
-    window.location.reload();
   };
 
   if (!gameOver) {
@@ -258,7 +242,10 @@ const Quiz = () => {
               >
                 No
               </button>
-              <button className='save-btn yes' onClick={handleSaveScore}>
+              <button
+                className='save-btn yes'
+                onClick={() => setUserSave(true)}
+              >
                 Yes
               </button>
             </div>
@@ -274,7 +261,7 @@ const Quiz = () => {
                 className='user-input'
                 required
                 value={user}
-                onChange={handleUserInputChange}
+                onChange={(e) => setUser(e.target.value)}
               />
               <label>Password:</label>
               <input
@@ -284,7 +271,7 @@ const Quiz = () => {
                 required
                 minLength={6}
                 value={password}
-                onChange={handlePasswordInputChange}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <button className='submit-btn' type='submit'>
                 Submit
@@ -295,7 +282,10 @@ const Quiz = () => {
         {noBtnClicked || formSubmitted ? (
           <div className='play-again-container'>
             <p className='thanks-text'>Thank you for playing!</p>
-            <button className='restart-btn' onClick={handleRestart}>
+            <button
+              className='restart-btn'
+              onClick={() => window.location.reload()}
+            >
               Start a new Quiz
             </button>
           </div>
