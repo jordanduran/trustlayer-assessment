@@ -11,9 +11,9 @@ const Leaderboard = () => {
         .map((user) => {
           return (
             <tr key={uuidv4()}>
-              <td>{user.user || 'N/A'}</td>
-              <td>{user.score || 'N/A'}</td>
-              <td>{user.date || 'N/A'}</td>
+              <td>{user.user}</td>
+              <td>{user.score}</td>
+              <td>{user.date}</td>
             </tr>
           );
         })
