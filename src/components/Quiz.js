@@ -13,7 +13,7 @@ const Quiz = () => {
   const [userIsCorrect, setUserIsCorrect] = useState(false);
   const [checkAnswerBtnClicked, setCheckAnswerBtnClicked] = useState(false);
   const [score, setScore] = useState(0);
-  const [gameOver, setGameOver] = useState(true);
+  const [gameOver, setGameOver] = useState(false);
   const [userSave, setUserSave] = useState(false);
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
