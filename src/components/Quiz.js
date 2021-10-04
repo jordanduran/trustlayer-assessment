@@ -7,6 +7,7 @@ const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [previousQuestionIndex, setPreviousQuestionIndex] = useState(0);
   const [firstQuestionAnswered, setFirstQuestionAnswered] = useState(false);
+  const [answeredQuestions, setAnsweredQuestions] = useState([]);
   const [options, setOptions] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [userIsCorrect, setUserIsCorrect] = useState(false);
@@ -96,6 +97,10 @@ const Quiz = () => {
   };
 
   const handleNextBtnClick = () => {
+    setAnsweredQuestions([
+      ...answeredQuestions,
+      questionsData[currentQuestionIndex],
+    ]);
     setCurrentQuestionIndex(currentQuestionIndex + 1);
     setPreviousQuestionIndex(currentQuestionIndex);
     setSelectedOption('');
@@ -142,10 +147,10 @@ const Quiz = () => {
   const handleRestart = () => {
     window.location.reload();
   };
-
-  console.log('CURR', currentQuestionIndex);
-  console.log('PREV', previousQuestionIndex);
-
+  console.log(answeredQuestions);
+  console.log(
+    questionsData.length && typeof questionsData[currentQuestionIndex].question
+  );
   if (!gameOver) {
     return (
       <div className='quiz-container'>
@@ -217,7 +222,10 @@ const Quiz = () => {
           <button
             className='prev-btn'
             onClick={handlePrevBtnClick}
-            disabled={currentQuestionIndex === 0}
+            disabled={
+              currentQuestionIndex === 0 ||
+              previousQuestionIndex === currentQuestionIndex
+            }
           >
             Previous
           </button>
