@@ -15,20 +15,22 @@ const Leaderboard = () => {
             </tr>
           );
         })
-    : 'No Users';
+    : 'No Users'.slice(0, 9);
 
   return (
     <div className='table-container'>
-      <table className='leaderboard-table'>
-        <tbody>
-          <tr>
-            <th>User</th>
-            <th>Score</th>
-            <th>Date</th>
-          </tr>
-          {listOfUsers}
-        </tbody>
-      </table>
+      {listOfUsers.length && (
+        <table className='leaderboard-table'>
+          <tbody>
+            <tr>
+              <th>User</th>
+              <th>Score</th>
+              <th>Date</th>
+            </tr>
+            {listOfUsers}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

@@ -24,6 +24,7 @@ const Quiz = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [leaderboardUsers, setLeaderboardUsers] = useState([]);
   const [noBtnClicked, setNoBtnClicked] = useState(false);
+  const [refreshBtnClicked, setRefreshBtnClicked] = useState(false);
 
   // Fetch data from API on component mount
 
@@ -66,7 +67,7 @@ const Quiz = () => {
   useEffect(() => {
     const data = userData && userData;
     window.localStorage.setItem('users', JSON.stringify(data));
-  }, [userData]);
+  }, [userData, refreshBtnClicked]);
 
   // Creating an array combining correct answer and incorrect answers then randomly sorting it
 
@@ -138,7 +139,7 @@ const Quiz = () => {
         user,
         password,
       },
-    ].slice(0, 9);
+    ];
     setLeaderboardUsers(updatedLeaderboard);
     setUser('');
     setPassword('');
@@ -151,7 +152,7 @@ const Quiz = () => {
   if (!gameOver) {
     return (
       <div className='quiz-container'>
-        <h1>Quiz</h1>
+        <h1>Random Quiz</h1>
         <div className='quiz-card'>
           <h2 className='question-header'>
             Question {currentQuestionIndex + 1} of {questionsData.length}
@@ -224,7 +225,8 @@ const Quiz = () => {
             onClick={handlePrevBtnClick}
             disabled={
               currentQuestionIndex === 0 ||
-              previousQuestionIndex === currentQuestionIndex
+              previousQuestionIndex === currentQuestionIndex ||
+              checkAnswerBtnClicked
             }
           >
             Previous
@@ -280,6 +282,7 @@ const Quiz = () => {
                 name='password'
                 className='password-input'
                 required
+                minLength={6}
                 value={password}
                 onChange={handlePasswordInputChange}
               />
@@ -300,6 +303,16 @@ const Quiz = () => {
         <h1 className='highscore-header'>LEADERBOARD</h1>
 
         <Leaderboard users={leaderboardUsers} />
+        {formSubmitted && (
+          <div>
+            <button
+              className='refresh-btn'
+              onClick={() => setRefreshBtnClicked(true)}
+            >
+              Refresh Leaderboard
+            </button>
+          </div>
+        )}
       </div>
     );
   }
