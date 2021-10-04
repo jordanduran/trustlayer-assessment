@@ -15,7 +15,8 @@ const Leaderboard = () => {
             </tr>
           );
         })
-    : 'No Users'.slice(0, 9);
+        .slice(0, 9)
+    : 'No Users';
 
   return (
     <div className='table-container'>
