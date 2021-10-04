@@ -15,7 +15,7 @@ const Leaderboard = () => {
             </tr>
           );
         })
-        .slice(0, 9)
+        .slice(0, 10)
     : 'No Users';
 
   return (
