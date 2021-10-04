@@ -147,10 +147,7 @@ const Quiz = () => {
   const handleRestart = () => {
     window.location.reload();
   };
-  console.log(answeredQuestions);
-  console.log(
-    questionsData.length && typeof questionsData[currentQuestionIndex].question
-  );
+
   if (!gameOver) {
     return (
       <div className='quiz-container'>
