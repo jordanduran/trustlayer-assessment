@@ -191,9 +191,9 @@ body {
   margin: 1em 0;
 }
 
-.high-score-header {
+.highscore-header {
   text-align: center;
-  margin: 0;
+  text-decoration: underline;
 }
 
 table {
