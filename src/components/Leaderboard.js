@@ -3,6 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 const Leaderboard = () => {
   const leaderboardUsers = JSON.parse(localStorage.getItem('users'));
 
+  // Map over stored users array and storing top 10
+
   const listOfUsers = leaderboardUsers
     ? leaderboardUsers
         .sort((a, b) => b.score - a.score)

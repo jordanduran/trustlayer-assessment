@@ -69,8 +69,6 @@ const Quiz = () => {
     window.localStorage.setItem('users', JSON.stringify(data));
   }, [userData, refreshBtnClicked]);
 
-  // Creating an array combining correct answer and incorrect answers then randomly sorting it
-
   const handleSelectOption = (userSelectedOption) => {
     setSelectedOption(userSelectedOption);
   };
