@@ -4,7 +4,7 @@ import Leaderboard from './Leaderboard';
 
 const Quiz = () => {
   const [questionsData, setQuestionsData] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(9);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [previousQuestionIndex, setPreviousQuestionIndex] = useState(0);
   const [firstQuestionAnswered, setFirstQuestionAnswered] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
