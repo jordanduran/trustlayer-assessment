@@ -69,10 +69,6 @@ const Quiz = () => {
     window.localStorage.setItem('users', JSON.stringify(data));
   }, [userData, refreshBtnClicked]);
 
-  const handleSelectOption = (userSelectedOption) => {
-    setSelectedOption(userSelectedOption);
-  };
-
   // Adds points according to difficulty of question
 
   const handleCheckAnswer = () => {
@@ -155,7 +151,7 @@ const Quiz = () => {
                       ? 'answer-option selected'
                       : 'answer-option'
                   }
-                  onClick={() => handleSelectOption(option)}
+                  onClick={() => setSelectedOption(option)}
                   disabled={
                     checkAnswerBtnClicked ||
                     (previousQuestionIndex === currentQuestionIndex &&
