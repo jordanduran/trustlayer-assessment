@@ -37,8 +37,7 @@ body {
   width: 400px;
   height: fit-content;
   background-color: rgb(255, 247, 232);
-  /* border-radius: 6px; */
-  /* box-shadow: 5px 5px 5px rgb(187, 187, 187); */
+  border: 1px solid black;
   padding: 1em;
 }
 
@@ -215,10 +214,6 @@ td {
 td {
   text-transform: uppercase;
 }
-
-/* tr:nth-child(even) {
-  background-color: #dddddd;
-} */
 
 .play-again-container {
   display: flex;
