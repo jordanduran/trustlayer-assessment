@@ -198,26 +198,6 @@ body {
   text-decoration: underline;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td,
-th {
-  border: 1px solid #131313;
-  padding: 8px;
-}
-
-th,
-td {
-  text-align: center;
-}
-
-td {
-  text-transform: uppercase;
-}
-
 .play-again-container {
   display: flex;
   flex-direction: column;
@@ -253,4 +233,26 @@ td {
 
 .refresh-btn:hover {
   background-color: rgb(0, 150, 199);
+}
+
+/* Leaderboard Component Styles */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #131313;
+  padding: 8px;
+}
+
+th,
+td {
+  text-align: center;
+}
+
+td {
+  text-transform: uppercase;
 }
