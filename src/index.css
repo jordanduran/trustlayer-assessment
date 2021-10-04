@@ -28,6 +28,8 @@ body {
 .question {
   text-align: center;
   margin-bottom: 3em;
+  max-width: 350px;
+  word-wrap: break-word;
 }
 
 .quiz-card {
