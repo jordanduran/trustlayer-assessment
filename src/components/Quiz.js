@@ -72,8 +72,10 @@ const Quiz = () => {
   // Adds points according to difficulty of question
 
   const handleCheckAnswer = () => {
-    setFirstQuestionAnswered(true);
     setCheckAnswerBtnClicked(true);
+    if (currentQuestionIndex === 0) {
+      setFirstQuestionAnswered(true);
+    }
     if (selectedOption === questionsData[currentQuestionIndex].correct_answer) {
       setUserIsCorrect(true);
       if (questionsData[currentQuestionIndex].difficulty === 'easy') {
