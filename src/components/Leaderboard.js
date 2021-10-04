@@ -11,9 +11,9 @@ const Leaderboard = () => {
         .map((user) => {
           return (
             <tr key={uuidv4()}>
-              <td>{user.user}</td>
-              <td>{user.score}</td>
-              <td>{user.date}</td>
+              <td>{user.user || 'N/A'}</td>
+              <td>{user.score || 'N/A'}</td>
+              <td>{user.date || 'N/A'}</td>
             </tr>
           );
         })
@@ -22,7 +22,7 @@ const Leaderboard = () => {
 
   return (
     <div className='table-container'>
-      {listOfUsers.length && (
+      {listOfUsers.length ? (
         <table className='leaderboard-table'>
           <tbody>
             <tr>
@@ -33,6 +33,8 @@ const Leaderboard = () => {
             {listOfUsers}
           </tbody>
         </table>
+      ) : (
+        'No score saved yet'
       )}
     </div>
   );
