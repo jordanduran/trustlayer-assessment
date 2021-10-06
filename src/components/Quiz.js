@@ -4,7 +4,7 @@ import Leaderboard from './Leaderboard';
 
 const Quiz = () => {
   const [questionsData, setQuestionsData] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(9);
   const [previousQuestionIndex, setPreviousQuestionIndex] = useState(0);
   const [firstQuestionAnswered, setFirstQuestionAnswered] = useState(false);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
@@ -12,6 +12,7 @@ const Quiz = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [userIsCorrect, setUserIsCorrect] = useState(false);
   const [checkAnswerBtnClicked, setCheckAnswerBtnClicked] = useState(false);
+  const [answersCorrect, setAnswersCorrect] = useState(0);
   const [prevBtnClicked, setPrevBtnClicked] = useState(false);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -76,6 +77,7 @@ const Quiz = () => {
     setCheckAnswerBtnClicked(true);
     if (currentQuestionIndex === 0) {
       setFirstQuestionAnswered(true);
+      setAnswersCorrect(answersCorrect + 1);
     }
     if (selectedOption === questionsData[currentQuestionIndex].correct_answer) {
       setUserIsCorrect(true);
@@ -227,7 +229,10 @@ const Quiz = () => {
     return (
       <div className='game-over-container'>
         <h1 className='game-over-header'>Game Over</h1>
-        <p className='final-score'>Your final score is {score}</p>
+        <p className='final-result'>Your final score is {score}</p>
+        <p className='final-result'>
+          You got {answersCorrect}/{questionsData.length} answers correct
+        </p>
         {!userSave && !noBtnClicked && (
           <div className='game-over-form-container'>
             <p className='save-score-header'>
