@@ -77,10 +77,10 @@ const Quiz = () => {
     setCheckAnswerBtnClicked(true);
     if (currentQuestionIndex === 0) {
       setFirstQuestionAnswered(true);
-      setAnswersCorrect(answersCorrect + 1);
     }
     if (selectedOption === questionsData[currentQuestionIndex].correct_answer) {
       setUserIsCorrect(true);
+      setAnswersCorrect(answersCorrect + 1);
       if (questionsData[currentQuestionIndex].difficulty === 'easy') {
         setScore(score + 1);
       } else if (questionsData[currentQuestionIndex].difficulty === 'medium') {
