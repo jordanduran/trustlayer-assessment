@@ -12,6 +12,7 @@ const Quiz = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [userIsCorrect, setUserIsCorrect] = useState(false);
   const [checkAnswerBtnClicked, setCheckAnswerBtnClicked] = useState(false);
+  const [prevBtnClicked, setPrevBtnClicked] = useState(false);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [userSave, setUserSave] = useState(false);
@@ -89,6 +90,7 @@ const Quiz = () => {
   };
 
   const handlePrevBtnClick = () => {
+    setPrevBtnClicked(true);
     setCurrentQuestionIndex(currentQuestionIndex - 1);
     setCheckAnswerBtnClicked(true);
   };
@@ -103,6 +105,7 @@ const Quiz = () => {
     setSelectedOption('');
     setCheckAnswerBtnClicked(false);
     setUserIsCorrect(false);
+    setPrevBtnClicked(false);
   };
 
   const handleSubmit = (e) => {
@@ -156,8 +159,7 @@ const Quiz = () => {
                   onClick={() => setSelectedOption(option)}
                   disabled={
                     checkAnswerBtnClicked ||
-                    (previousQuestionIndex === currentQuestionIndex &&
-                      currentQuestionIndex !== 0) ||
+                    prevBtnClicked ||
                     (firstQuestionAnswered && currentQuestionIndex === 0)
                   }
                 >
@@ -184,10 +186,10 @@ const Quiz = () => {
           </button>
         </div>
         <div className='answer-result-wrapper'>
-          {userIsCorrect && checkAnswerBtnClicked && (
+          {userIsCorrect && checkAnswerBtnClicked && !prevBtnClicked && (
             <p className='correct-answer'>You are correct!</p>
           )}
-          {checkAnswerBtnClicked && !userIsCorrect && (
+          {checkAnswerBtnClicked && !userIsCorrect && !prevBtnClicked && (
             <p className='incorrect-answer'>
               Sorry, the correct answer is{' '}
               {questionsData.length &&
